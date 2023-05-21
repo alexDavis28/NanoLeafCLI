@@ -1,13 +1,13 @@
 from nanoleafapi import Nanoleaf
-import json
-from os.path import exists
+import os.path
+import pathlib
 import config
 import argparse
 
 
 def setup(config_file_path: str = "config.json") -> (Nanoleaf, dict):
     # Check config exists
-    if not exists(config_file_path):
+    if not os.path.exists(config_file_path):
         config.create_config(config_file_path)
 
     # Load config and prompt for missing data
@@ -23,7 +23,8 @@ def setup(config_file_path: str = "config.json") -> (Nanoleaf, dict):
 
 
 if __name__ == '__main__':
-    nanoleaf, config_data = setup()
+    config_path = os.path.join(pathlib.Path(__file__).parent.resolve(), "config.json")
+    nanoleaf, config_data = setup(config_path)
     parser = argparse.ArgumentParser()
     parser.add_argument("effect", help="The scene to set the panels to - solid effects should be configured in the JSON")
     args = parser.parse_args()
