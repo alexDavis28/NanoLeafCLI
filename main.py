@@ -5,7 +5,7 @@ import config
 import argparse
 
 
-def setup(config_file_path: str = "Config.json") -> (Nanoleaf, dict):
+def setup(config_file_path: str = "config.json") -> (Nanoleaf, dict):
     # Check config exists
     if not exists(config_file_path):
         config.create_config(config_file_path)
